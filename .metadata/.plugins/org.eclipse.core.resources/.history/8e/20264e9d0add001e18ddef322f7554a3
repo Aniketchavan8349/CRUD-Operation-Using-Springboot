@@ -1,0 +1,15 @@
+package com.tka.DemoDatabase.entity.country;
+
+import jakarta.persistence.Entity;
+
+@Entity
+public class CountryClass {
+
+	int cid;
+	 String cname;
+	 
+	 
+	 
+	
+
+}

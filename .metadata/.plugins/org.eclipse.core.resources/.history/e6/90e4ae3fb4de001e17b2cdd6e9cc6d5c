@@ -1,0 +1,47 @@
+package com.tka.PracticeInsertData.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tka.PracticeInsertData.entity.Family;
+import com.tka.PracticeInsertData.service.FamilyService;
+
+@RestController
+@RequestMapping("/apifamily")
+public class FamilyController {
+	
+	@Autowired
+	FamilyService service;
+	
+	@PostMapping("saveData")
+	public String saveRecord(@RequestBody Family f) {
+		String s=service.InsertData(f);
+		return s;
+	}
+
+	@PutMapping("/updateData/{id}")
+	public String UpdateData(@PathVariable int id,@RequestBody Family f) {
+		
+		String s=service.UpdateData(id, f);
+		return s;
+	}
+	
+	@DeleteMapping("/deleteData/{id}")
+	public String DeleteData(@PathVariable int id) {
+		String st=service.DeleteData(id);
+		return st;
+	}
+	
+	@GetMapping("/getPerticularRecord/{id}")
+	public Family getPerticularRecord(@PathVariable int id) {
+		Family f=service.getAllRecord(id);
+		return f;
+	}
+}

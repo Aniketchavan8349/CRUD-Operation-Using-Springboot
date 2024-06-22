@@ -1,0 +1,36 @@
+package com.example.ProjectDemo.Service;
+
+import java.util.Objects;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.ProjectDemo.dao.MainDao;
+import com.example.ProjectDemo.entity.Country;
+
+@Service
+public class MainService {
+	
+	@Autowired
+	MainDao dao;
+	
+
+
+
+	public String addCountry(Country c) {
+		String msg=dao.addCountry(c);
+		if(Objects.isNull(msg)) {
+			msg="Data is not Added Succesfully...";
+		}
+		return msg;
+
+}
+	public String updateData(Country c) {
+		String msg=dao.updateData(c);
+		if(Objects.isNull(msg)) {
+			msg="Data is not updated Succesfully...";
+		}
+		return msg;
+
+}
+}

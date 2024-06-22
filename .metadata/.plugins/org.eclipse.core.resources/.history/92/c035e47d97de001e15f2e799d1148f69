@@ -1,0 +1,28 @@
+package com.tka.PracticeInsertData.dao;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.tka.PracticeInsertData.entity.AddressClass;
+
+@Repository
+public class AddressDao {
+
+	
+	@Autowired
+	SessionFactory factory;
+	
+	
+	public String insertData(AddressClass add) {
+		
+		Session session=factory.openSession();
+		session.beginTransaction();
+		session.persist(add);
+		session.getTransaction().commit();
+		session.close();
+		return "Your record will be Inserted...";
+	}
+	
+}

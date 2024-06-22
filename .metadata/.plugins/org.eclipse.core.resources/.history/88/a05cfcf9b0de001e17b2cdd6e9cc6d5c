@@ -1,0 +1,22 @@
+package com.tka.PracticeInsertData.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.tka.PracticeInsertData.dao.FamilyDao;
+import com.tka.PracticeInsertData.entity.Family;
+
+@Service
+public class FamilyService {
+	
+	@Autowired
+	FamilyDao dao;
+	
+	public String InsertData(Family f) {
+		
+		String s=dao.insertData(f);
+		return s;
+		
+	}
+
+}

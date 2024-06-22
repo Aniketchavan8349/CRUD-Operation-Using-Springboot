@@ -1,0 +1,77 @@
+package com.tka.PracticeInsertData.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tka.PracticeInsertData.entity.StudentClass;
+import com.tka.PracticeInsertData.service.StudentService;
+
+@RestController
+@RequestMapping("/apistudent")
+public class StudentController {
+	
+	@Autowired
+	StudentService service;
+	
+	@PostMapping("/saveData")
+	public String InsertData(@RequestBody StudentClass stud) {
+		String s=service.InsertData(stud);
+		return s;
+	}
+	@PutMapping("updateData/{id}")
+	public String UpdateRecord(@PathVariable int id,@RequestBody StudentClass s) {
+		
+		String st=service.UpdateData(id, s);
+		return st;
+	}
+	@DeleteMapping("deleteData/{id}")
+	public String UpdateRecord(@PathVariable int id) {
+		
+		String st=service.DeleteData(id);
+		return st;
+	}
+	@GetMapping("getPerticularRecord/{id}")
+	public StudentClass getPerticularRecord(@PathVariable int id) {
+		
+		StudentClass st=service.getPerticularRecord(id);
+		return st;
+	}
+	@GetMapping("getAllRecord")
+	public List<StudentClass> getAllRecord() {
+		
+		List<StudentClass> st=service.getAllRecord();
+		return st;
+	}
+	//-----------------====================================--------------------//
+	@PostMapping("/addRecord")
+	public String addRecord(@RequestBody StudentClass s) {
+	    String msg=service.addRecord(s);
+		return msg;
+	}
+
+	@PutMapping("/updateRecord")
+	public String updateRecord(@RequestBody StudentClass s) {
+		String msg=service.updateRecord(s);
+		return msg;
+	}
+	
+	@DeleteMapping("/deleteRecord")
+	public String deleteRecord(@RequestBody StudentClass s) {
+		 String msg=service.deleteRecord(s);
+		return msg;
+	}
+	@GetMapping("/getRecord")
+	public StudentClass getRecord(@RequestBody StudentClass s) {
+		StudentClass msg=service.getRecord(s);
+		return msg;
+	}
+}

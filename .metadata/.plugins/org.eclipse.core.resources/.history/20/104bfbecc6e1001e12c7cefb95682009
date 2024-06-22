@@ -1,0 +1,86 @@
+package com.tka.PracticeInsertData.dao;
+
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.tka.PracticeInsertData.entity.StudentClass;
+
+
+
+@Repository
+public class StudentDao {
+	
+	@Autowired
+     SessionFactory factory;
+	
+	
+	public String insertData(StudentClass stud) {
+		
+		Session session=factory.openSession();
+		session.beginTransaction();
+		session.persist(stud);
+		session.getTransaction().commit();
+		session.close();
+		return "Your record will be Inserted...";
+	}
+	public String updateData(int id,StudentClass s) {
+		Session session=factory.openSession();
+		session.beginTransaction();
+		
+		StudentClass stud=session.get(StudentClass.class,id);
+		stud.setName(s.getName());
+		stud.setEmail(s.getEmail());
+		stud.setMobileno(s.getMobileno());
+		stud.setBranch(s.getBranch());
+		
+		session.merge(stud);
+		
+		session.getTransaction().commit();
+		session.close();
+		return "Your record will be Updated...";
+	}
+
+	public String DeleteData(int id) {
+		
+		Session session=factory.openSession();
+		session.beginTransaction();
+	 StudentClass s1=	session.get(StudentClass.class,id);
+		session.remove(s1);
+		session.getTransaction().commit();
+		session.close();
+		return "Your record will be Deleted...";
+	}
+	
+public StudentClass getPerticularRecord(int id) {
+		
+		Session session=factory.openSession();
+		session.beginTransaction();
+	
+		String hqlQuery="from StudentClass where id=:myid";
+	    Query<StudentClass> query=	session.createQuery(hqlQuery,StudentClass.class);
+		query.setParameter("myid",id);
+		StudentClass s= query.uniqueResult();
+		session.getTransaction().commit();
+		session.close();
+		return s;
+	}
+public List<StudentClass> getAllRecord() {
+	
+	Session session=factory.openSession();
+	session.beginTransaction();
+
+	String hqlQuery="from StudentClass";
+    Query<StudentClass> query=	session.createQuery(hqlQuery,StudentClass.class);
+	List<StudentClass> list= query.list();
+	
+	session.getTransaction().commit();
+	session.close();
+	return list;
+}
+
+}

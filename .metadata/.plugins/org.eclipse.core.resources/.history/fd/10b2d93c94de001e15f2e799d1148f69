@@ -1,0 +1,39 @@
+package com.tka.PracticeInsertData.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tka.PracticeInsertData.entity.Employee1;
+import com.tka.PracticeInsertData.service.ServiceClass;
+
+@RestController
+@RequestMapping("/apiemp")
+public class ControllerClass {
+	
+	@Autowired
+	ServiceClass service;
+	
+	@PostMapping("/saveData")
+	public String saverecord( @RequestBody Employee1 e) {
+		
+		String msg=service.InsertData(e);
+		
+		return msg;
+	}
+	
+	@PutMapping("updateData{id}")
+	public String updatedata(@PathVariable int id,@RequestBody Employee1 e) {
+		
+		String s=service.UpdateData(id, e);
+		return s;
+	}
+
+	
+	
+	
+}

@@ -1,0 +1,62 @@
+package com.tka.PracticeInsertData.dao;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.tka.PracticeInsertData.entity.CountryClass;
+
+
+
+@Repository
+public class CountryDao {
+	
+	@Autowired
+     SessionFactory factory;
+	
+	public String insertData(CountryClass c) {
+
+		Session session=factory.openSession();
+		session.beginTransaction();
+		session.persist(c);
+		session.getTransaction().commit();
+		session.close();
+		
+		return "Data will be inserted";
+		
+	}
+	public String updateData(int id,CountryClass c) {
+
+		Session session=factory.openSession();
+		session.beginTransaction();
+	
+		CountryClass con=session.get(CountryClass.class,id);
+		
+		con.setCid(c.getCid());
+		con.setCname(c.getCname());
+		session.merge(con);
+
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		return "Data will be updated";
+		
+	}
+	
+	public String deleteData(int id) {
+
+		Session session=factory.openSession();
+		session.beginTransaction();
+		CountryClass c=	session.get(CountryClass.class, id);
+		session.remove(c);
+		session.getTransaction().commit();
+		session.close();
+		
+		return "Data will be deleted";
+		
+	}
+
+
+}

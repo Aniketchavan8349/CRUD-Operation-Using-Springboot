@@ -1,0 +1,21 @@
+package com.tka.PracticeInsertData.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.tka.PracticeInsertData.dao.CountryDao;
+import com.tka.PracticeInsertData.entity.CountryClass;
+
+@Service
+public class CountryService {
+	
+	@Autowired
+	CountryDao dao;
+	
+	public String InsertData(CountryClass c) {
+		
+		String msg=dao.insertData(c);
+		return msg;
+	}
+
+}

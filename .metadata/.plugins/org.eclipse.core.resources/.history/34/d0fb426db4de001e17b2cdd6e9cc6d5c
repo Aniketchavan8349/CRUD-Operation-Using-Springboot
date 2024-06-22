@@ -1,0 +1,91 @@
+package com.tka.PracticeInsertData.dao;
+
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.tka.PracticeInsertData.entity.Family;
+
+
+@Repository
+public class FamilyDao {
+
+	
+	
+	@Autowired
+    SessionFactory factory;
+	
+	
+	public String insertData(Family f) {
+		
+		Session session=factory.openSession();
+		session.beginTransaction();
+		session.persist(f);
+		session.getTransaction().commit();
+		session.close();
+		return "Your record will be inserted Succesfully...";
+	}
+	public String updateData(int id,Family f) {
+		Session session=factory.openSession();
+		session.beginTransaction();
+		Family f1= session.get(Family.class,id);
+		f1.setAadharno(f.getAadharno());
+		f1.setDrivinglicenceno(f.getDrivinglicenceno());
+		f1.setPassportno(f.getPassportno());
+		
+		session.merge(f1);
+		session.getTransaction().commit();
+		session.close();
+		
+		return "Your data will be updated Successfully......";
+	}
+	
+	public String deleteData(int id) {
+		Session session=factory.openSession();
+		session.beginTransaction();
+		
+	    Family f=session.get(Family.class,id);
+		session.remove(f);
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		return"your Data will be deleted...";
+	}
+	
+	public Family getPerticularRecord(int id) {
+		Session session=factory.openSession();
+		session.beginTransaction();
+		
+		String hqlQuery="From Family where id=:myid";
+		Query<Family> query= session.createQuery(hqlQuery,Family.class);
+		query.setParameter("myid",id);
+		Family f= query.uniqueResult();
+	
+		session.getTransaction().commit();
+		session.close();
+		
+		return f;
+	}
+	
+	public List<Family> getAllRecord() {
+		
+		Session session=factory.openSession();
+		session.beginTransaction();
+		
+		String hqlQuery="from FAmily";
+		Query<Family> query=session.createQuery(hqlQuery,Family.class);
+		List<Family> list= query.list();
+		
+
+		session.getTransaction().commit();
+		session.close();
+		
+		return list;
+	}
+
+}

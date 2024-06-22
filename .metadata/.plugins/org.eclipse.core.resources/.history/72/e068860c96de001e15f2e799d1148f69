@@ -1,0 +1,26 @@
+package com.tka.PracticeInsertData.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tka.PracticeInsertData.entity.CountryClass;
+import com.tka.PracticeInsertData.service.CountryService;
+
+@RestController
+@RequestMapping("/api")
+public class CountryController {
+
+	
+	@Autowired
+	CountryService service;
+	
+	@PostMapping("/savedData")
+	public String saverecord(@RequestBody CountryClass c) {
+		
+		String s=service.InsertData(c);
+		return s;
+	}
+}

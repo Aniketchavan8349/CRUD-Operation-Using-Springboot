@@ -1,0 +1,49 @@
+package com.tka.PracticeInsertData.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tka.PracticeInsertData.entity.AddressClass;
+import com.tka.PracticeInsertData.service.AddressService;
+
+@RestController
+@RequestMapping("/apiaddress")
+public class AddressController {
+	
+	@Autowired
+	AddressService service;
+	
+	@PostMapping("/saveData")
+	public String InsertData(@RequestBody AddressClass add) {
+	
+		String s=service.InsertData(add);
+		return s;
+	}
+
+	@PutMapping("/updateData/{id}")
+	public String updateData(@PathVariable int id, @RequestBody AddressClass add) {
+	
+		String s=service.UpdateData(id,add);
+		return s;
+	}
+	@DeleteMapping("/deleteData/{id}")
+	public String deleteData(@PathVariable int id) {
+	
+		String s=service.DeleteData(id);
+		return s;
+	}
+	
+	@GetMapping("/getPerticularRecord/{id}")
+	public AddressClass getPerticularData(@PathVariable int id) {
+	
+		AddressClass s=service.getPerticularRecord(id);
+		return s;
+	}
+}

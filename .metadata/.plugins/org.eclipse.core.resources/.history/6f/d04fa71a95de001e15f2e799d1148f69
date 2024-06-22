@@ -1,0 +1,29 @@
+package com.tka.PracticeInsertData.dao;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.tka.PracticeInsertData.entity.StudentClass;
+
+
+
+@Repository
+public class StudentDao {
+	
+	@Autowired
+     SessionFactory factory;
+	
+	
+	public String insertData(StudentClass stud) {
+		
+		Session session=factory.openSession();
+		session.beginTransaction();
+		session.persist(stud);
+		session.getTransaction().commit();
+		session.close();
+		return "Your record will be Inserted...";
+	}
+
+}

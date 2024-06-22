@@ -1,0 +1,48 @@
+package com.tka.PracticeInsertData.dao;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.tka.PracticeInsertData.entity.Employee1;
+
+@Repository
+public class DaoClass {
+	
+	@Autowired
+	SessionFactory factory;
+	
+	public String insertData(Employee1 e) {
+		
+		
+		Session session=factory.openSession();
+		session.beginTransaction();
+		session.persist(e);
+		session.getTransaction().commit();
+		session.close();
+		
+	
+		return"Record is inserted..";
+	}
+	
+	public String updateData(int id,Employee1 e) {
+		Session session=factory.openSession();
+		session.beginTransaction();
+		
+		Employee1 emp= session.get(Employee1.class,id);
+		emp.setName(e.getName());
+		emp.setEmail(e.getEmail());
+		emp.setMobileno(e.getMobileno());
+		
+		session.merge(emp);
+		session.getTransaction().commit();
+		session.close();
+		
+		return"record is updated...";
+		
+		
+	}
+	
+
+}

@@ -1,0 +1,5 @@
+package com.tka.DemoDatabase.entity;
+
+public class CountryClass {
+
+}

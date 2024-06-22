@@ -1,0 +1,23 @@
+package com.tka.PracticeInsertData.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.tka.PracticeInsertData.dao.StudentDao;
+import com.tka.PracticeInsertData.entity.StudentClass;
+
+@Service
+public class StudentService {
+	
+	@Autowired
+	StudentDao dao;
+	
+	
+	public String InsertData(StudentClass stud) {
+		
+	String s=	dao.insertData(stud);
+		return s;
+		
+	}
+
+}

@@ -1,0 +1,27 @@
+package com.tka.PracticeInsertData.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.tka.PracticeInsertData.dao.AddressDao;
+import com.tka.PracticeInsertData.entity.AddressClass;
+
+@Service
+public class AddressService {
+	
+	@Autowired
+	AddressDao dao;
+	
+	
+	public String InsertData(AddressClass add) {
+		
+		String s=dao.insertData(add);
+		return s;
+	}
+
+public String UpdateData(int id,AddressClass add) {
+		
+		String s=dao.updateData(id,add);
+		return s;
+	}
+}

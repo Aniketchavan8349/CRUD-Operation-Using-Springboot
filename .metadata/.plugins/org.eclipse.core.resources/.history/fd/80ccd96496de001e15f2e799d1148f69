@@ -1,0 +1,30 @@
+package com.tka.PracticeInsertData.dao;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.tka.PracticeInsertData.entity.CountryClass;
+
+
+
+@Repository
+public class CountryDao {
+	
+	@Autowired
+     SessionFactory factory;
+	
+	public String insertData(CountryClass c) {
+
+		Session session=factory.openSession();
+		session.beginTransaction();
+		session.persist(c);
+		session.getTransaction().commit();
+		session.close();
+		
+		return "Data will be inserted";
+		
+	}
+
+}

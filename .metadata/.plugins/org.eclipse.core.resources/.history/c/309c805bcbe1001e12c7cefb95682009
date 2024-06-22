@@ -1,0 +1,60 @@
+package com.tka.PracticeInsertData.service;
+
+import java.util.List;
+import java.util.Objects;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.tka.PracticeInsertData.dao.StudentDao;
+import com.tka.PracticeInsertData.entity.StudentClass;
+
+@Service
+public class StudentService {
+	
+	@Autowired
+	StudentDao dao;
+	
+	
+	public String InsertData(StudentClass stud) {
+		
+	String s=	dao.insertData(stud);
+		return s;
+		
+	}
+	public String UpdateData(int id,StudentClass s) {
+		String st=dao.updateData(id, s);
+		return st;
+	}
+
+	public String DeleteData(int id) {
+		String st=dao.DeleteData(id);
+		return st;
+	}
+	public StudentClass getPerticularRecord(int id) {
+		StudentClass st=dao.getPerticularRecord(id);
+		return st;
+	}
+	public List<StudentClass> getAllRecord() {
+		List<StudentClass> st=dao.getAllRecord();
+		return st;
+	}
+	
+	public String addRecord(StudentClass s) {
+		
+		String msg=dao.addRecord(s);
+		if(Objects.isNull(s)) {
+		 msg="Record is not Added.";
+		}
+		return msg;
+	}
+	
+	public String updateRecord(StudentClass s) {
+		String msg=dao.updateRecord(s);
+		if(Objects.isNull(s)) {
+			msg="Record is not updated";
+			
+		}
+		return msg;
+	}
+}
